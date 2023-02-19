@@ -1,23 +1,21 @@
 import logo from './logo.svg';
-import './App.css';
+import Navbar from './component/navbar';
+import User from './component/user';
+import Usercreate from './component/usercreate';
+import ViewProfile from './component/ViewProfile';
+import { Routes,Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+     <Navbar />
+     <Routes>
+      {/* ใช้ลิ้งหน้าโดยเข้าถึงผ่า path */}
+      <Route path='/' element={<User />}></Route>
+      <Route path='create' element={<Usercreate />}></Route>
+      <Route path='ViewProfile' element={<ViewProfile />}></Route>
+     </Routes>
+     
     </div>
   );
 }
