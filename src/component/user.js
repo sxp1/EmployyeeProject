@@ -122,7 +122,7 @@ export default function User() {
                   <TableCell align="right">Lastname</TableCell>
                   <TableCell align="right">Position</TableCell>
                   <TableCell align="right">Age</TableCell>
-                  <TableCell align="right" sx={{pr:7}}>Action</TableCell>
+                  <TableCell align="right" sx={{pr:12}}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -156,9 +156,12 @@ export default function User() {
                          <Button sx={{mr:3}}>View</Button>
                          </div>
                          </Link>
+                         <Link href="Edituser">
                          <div >
                          <Button sx={{mr:3}}>EDIT</Button>
                          </div>
+                         </Link>
+                       
                          
                       
                         <IconButton sx={{width:3}}>
@@ -166,6 +169,8 @@ export default function User() {
                         <DeleteForeverIcon sx={{ color: pink[500] ,minWidth: 3 }} onClick={()=>AletDelete(row.id,row.firstname,row.lastname)} />
                        
                         </IconButton>
+
+
                       
                       </ButtonGroup>
                      
