@@ -69,7 +69,7 @@ export default function Usercreate() {
               noValidate
               autoComplete="off"
             >
-              <h2> Create Employee </h2>
+              <h2> Edit Employee </h2>
               <form
                 onSubmit={(event) => {
                   event.preventDefault();
