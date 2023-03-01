@@ -29,17 +29,23 @@ import { IconButton } from '@mui/material';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 export default function Usercreate() {
+  const AletRead = () => {
+    Swal.fire({
+      title: 'View Profile',
+      text: "You won't be able to revert this!",
+      confirmButtonColor: '#4169e1',
+      confirmButtonText: 'OK'
+    })
+   }
   return (
     <React.Fragment>
       <CssBaseline />
       <Container  maxWidth="xl" sx={{ p: 5 }}>
-       
         <Paper  sx={{ p: 3 }}>
            <Box>
             <center>
-            <h1>View Profile</h1>
+            <Button onClick={AletRead}>View Profile</Button>
             </center>
-           {/* codeing hear */}
            </Box>
         </Paper>
       </Container>
