@@ -28,6 +28,7 @@ import { pink } from '@mui/material/colors';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import Userupdate from "./Edituser";
 
 
 export default function User() {
@@ -93,7 +94,12 @@ export default function User() {
 
  }
   
-
+ const userupdate = id =>{
+  window.location = 'Edituser/'+id
+ }
+ const viewprofile = id =>{
+  window.location = 'ViewProfile/'+id
+ }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -103,7 +109,7 @@ export default function User() {
           <Box display="flex" sx={{mb:2}}>
             <Box flexGrow={1}>
               <Typography variant="h6" gutterBottom>
-                User
+                <h3>Employee Data</h3>
               </Typography>
             </Box>
             <Box>
@@ -135,7 +141,7 @@ export default function User() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.customer_id}
+                      {row.employeeid}
                     </TableCell>
                     {/* ส่วนข้อมูลในตาราง */}
                     {/* เข้าถึงข้อมูลใน api เพื่อเอามาโชว์ผ่าน row  */}
@@ -152,16 +158,17 @@ export default function User() {
                         
                       >
                         {/* Link ใช้ลิ้งเพจ ดูตรงนี้แล้วให้ไปดูในไฟล์ index.js อีกทีในนั้นการเรียกใช้การลิ้งพาท */}
-                         <Link href="ViewProfile">
+                         
                         <div >
-                         <Button sx={{mr:3}}>View</Button>
+                         <Button sx={{mr:3}}onClick={()=>viewprofile(row.id)}>View</Button>
                          </div>
-                         </Link>
-                         <Link href="Edituser">
+                         
+
+                        
                          <div >
-                         <Button sx={{mr:3}}>EDIT</Button>
+                         <Button sx={{mr:3}}onClick={()=>userupdate(row.id)}>EDIT</Button>
                          </div>
-                         </Link>
+                        
                        
                          
                       

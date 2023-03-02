@@ -15,8 +15,8 @@ function App() {
       {/* ใช้ลิ้งหน้าโดยเข้าถึงผ่า path */}
       <Route path='/' element={<User />}></Route>
       <Route path='create' element={<Usercreate />}></Route>
-      <Route path='ViewProfile' element={<ViewProfile />}></Route>
-      <Route path='Edituser' element={<Edituser />}></Route>
+      <Route path='ViewProfile/:id' element={<ViewProfile />}></Route>
+      <Route path='Edituser/:id' element={<Edituser />}></Route>
      </Routes>
      
     </div>
