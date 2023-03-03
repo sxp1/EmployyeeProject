@@ -97,9 +97,6 @@ export default function Usercreate() {
                   <div class="col">ID Employee : --------------</div>
                   <div class="col">Birthday : --------------</div>
                   <div class="col">Education : --------------</div>
-                  <div class="col">Phone Number : --------------</div>
-                  <div class="col">Email : --------------</div>
-                  <div class="col">Salary : --------------</div>
               </div>
               <div>
                 <h3> ตำแหน่งหน้าที่ </h3>
