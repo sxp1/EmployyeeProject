@@ -36,110 +36,285 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import User from "./user";
 import TextField from "@mui/material/TextField";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function Usercreate() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm(
+
+  // );
   const onSubmit = (data) => {
     console.log(data);
+    console.log(department);
   };
 
   const theme = {
     spacing: [0, 2, 3, 5, 8],
   };
 
+  const handleChange = (event) => {
+    setdepartment(event.target.value);
+    console.log(department);
+  };
+  const handleSubmit1 = (event) => {
+    event.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      address: address,
+      age: age,
+      birthday: birthday,
+      department: department,
+      education: education,
+      email: email,
+      employeeid: employeeid,
+      firstname: fname,
+      lastname: lastname,
+      phonnumber: phonnumber,
+      position: position,
+      salary: salary,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://192.168.56.117:3000/adduser", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("a" + result);
+
+        window.location.href = "/";
+      })
+      .catch((error) => console.log("error", error));
+  };
+  const [fname, setfname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [employeeid, setemployeeid] = useState("");
+  const [department, setdepartment] = useState("");
+  const [age, setage] = useState("");
+  const [phonnumber, setphonnumber] = useState("");
+  const [position, setposition] = useState("");
+  const [salary, setsalary] = useState("");
+  const [address, setaddress] = useState("");
+  const [email, setemail] = useState("");
+  const [birthday, setbirthday] = useState("");
+  const [education, seteducation] = useState("");
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="xl" sx={{ p: 5 }}>
-        <Paper sx={{ p: 3 }}>
-          <center>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": {
-                  m: 5,
-                  width: "900px",
-                },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <h2> Edit Employee </h2>
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-              >
+        <center>
+          <Paper sx={{ p: 10, width: "1100px" }}>
+            <center>
+              <h2> Create Employee </h2>
+
+              <form onSubmit={handleSubmit1}>
                 <div>
-                  <TextField
-                    id="outlined-basic"
-                    label="First Name"
-                    variant="outlined"
-                    required
-                    sx={{
-                      mb: 1,
-                      fontSize: "var(--joy-fontSize-sm)",
-                      width: "300px",
-                    }}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Last Name"
-                    variant="outlined"
-                    required
-                    sx={{ mb: 1, fontSize: "var(--joy-fontSize-sm)" }}
-                    sx={{ ml: 3, width: "300px" }}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    id="outlined-number"
-                    label="Age"
-                    type="number"
-                    InputLabelProps={{ shrink: true }}
-                    inputProps={{ min: 1 }}
-                    margin="normal"
-                    sx={{ width: "300px" }}
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="ID Employee"
-                    variant="outlined"
-                    required
-                    sx={{ mb: 1, fontSize: "var(--joy-fontSize-sm)" }}
-                    sx={{ ml: 3, width: "300px" }}
-                    margin="normal"
-                  />
+                  <h3 sx={{ p: 5 }}>Profile</h3>
+                  <div>
+                    <TextField
+                      id="outlined-basic"
+                      label="First Name"
+                      variant="outlined"
+                      required
+                      value={fname}
+                      sx={{
+                        mb: 1,
+                        fontSize: "var(--joy-fontSize-sm)",
+                        width: "300px",
+                      }}
+                      onChange={(e) => setfname(e.target.value)}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Last Name"
+                      variant="outlined"
+                      required
+                      sx={{
+                        mb: 1,
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => setlastname(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="outlined-number"
+                      label="Employee ID"
+                      type="number"
+                      InputLabelProps={{ shrink: true }}
+                      inputProps={{ min: 1 }}
+                      margin="normal"
+                      required
+                      sx={{ width: "300px" }}
+                      onChange={(e) => setemployeeid(e.target.value)}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Age"
+                      variant="outlined"
+                      required
+                      sx={{
+                        mb: 1,
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => setage(e.target.value)}
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="Birthday"
+                        margin="normal"
+                        required
+                        sx={{ width: "300px", mt: 2 }}
+                        onChange={(e) => setbirthday(e.target.value)}
+                      />
+                    </LocalizationProvider>
+
+                    <TextField
+                      id="outlined-basic"
+                      label="Education"
+                      variant="outlined"
+                      required
+                      sx={{
+                        mb: 1,
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => seteducation(e.target.value)}
+                      margin="normal"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <TextField
-                    id="outlined-basic"
-                    label="Department"
-                    variant="outlined"
-                    required
-                    sx={{
-                      mb: 1,
-                      fontSize: "var(--joy-fontSize-sm)",
-                      width: "300px",
-                    }}
-                    margin="normal"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Posittion"
-                    variant="outlined"
-                    required
-                    sx={{ mb: 1, fontSize: "var(--joy-fontSize-sm)" }}
-                    sx={{ ml: 3, width: "300px" }}
-                    margin="normal"
-                  />
+                  <h3>Contact / Salary</h3>
+                  <div>
+                    <TextField
+                      id="outlined-basic"
+                      label="Phone number"
+                      variant="outlined"
+                      required
+                      sx={{
+                        fontSize: "var(--joy-fontSize-sm)",
+                        width: "300px",
+                      }}
+                      onChange={(e) => setphonnumber(e.target.value)}
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Address"
+                      variant="outlined"
+                      required
+                      sx={{
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => setaddress(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
+                    <TextField
+                      id="outlined-basic"
+                      label="Email"
+                      variant="outlined"
+                      required
+                      sx={{
+                        mb: 1,
+                        fontSize: "var(--joy-fontSize-sm)",
+                        width: "300px",
+                      }}
+                      onChange={(e) => setemail(e.target.value)}
+                      margin="normal"
+                    />
+                    <TextField
+                      id="outlined-basic"
+                      label="Salary"
+                      variant="outlined"
+                      required
+                      sx={{
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => setsalary(e.target.value)}
+                      margin="normal"
+                    />
+                  </div>
                 </div>
+
+                <div>
+                  <h3 sx={{ p: 5 }}>Position</h3>
+                  <div>
+                    <FormControl
+                      sx={{
+                        fontSize: "var(--joy-fontSize-sm)",
+                        width: "300px",
+                      }}
+                    >
+                      <InputLabel id="demo-simple-select-helper-label">
+                        Department
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="demo-simple-select-helper"
+                        value={department}
+                        label="Department"
+                        onChange={(e) => setdepartment(e.target.value)}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={"It"}>It</MenuItem>
+                        <MenuItem value={"SalesDepartment"}>
+                          Sales Department
+                        </MenuItem>
+                        <MenuItem value={"Accounting/FinanceDepartment"}>
+                          Accounting/Finance Department
+                        </MenuItem>
+                        <MenuItem value={"Department"}>HR Department</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <TextField
+                      id="outlined-basic"
+                      label="Position"
+                      variant="outlined"
+                      required
+                      sx={{
+                        fontSize: "var(--joy-fontSize-sm)",
+                        ml: 3,
+                        width: "300px",
+                      }}
+                      onChange={(e) => setposition(e.target.value)}
+                    />
+                  </div>
+                </div>
+
                 <Button
                   variant="contained"
                   href="/"
@@ -153,9 +328,9 @@ export default function Usercreate() {
                   Submit
                 </Button>
               </form>
-            </Box>
-          </center>
-        </Paper>
+            </center>
+          </Paper>
+        </center>
       </Container>
     </React.Fragment>
   );
