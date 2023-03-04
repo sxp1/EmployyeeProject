@@ -35,7 +35,10 @@ import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import User from "./user";
+
 import TextField from "@mui/material/TextField";
+// import TextField, {TextFieldProps} from '@material-ui/core/TextField'
+
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
@@ -45,6 +48,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { KeyboardDatePicker } from "@mui/x-date-pickers"; 
+// import dayjs from 'dayjs';
 
 export default function Userupdate() {
   // const {
@@ -78,10 +83,12 @@ export default function Userupdate() {
         setfname(result[0].firstname);
         setaddress(result[0].address);
         setemail(result[0].email);
+        
         setbirthday(result[0].birthday);
         seteducation(result[0].education);
       })
       .catch((error) => console.log("error", error));
+    
   }, [id]);
 
   const theme = {
@@ -133,9 +140,14 @@ export default function Userupdate() {
   const [address, setaddress] = useState("");
   const [salary, setsalary] = useState("");
   const [email, setemail] = useState("");
-  const [birthday, setbirthday] = useState("");
+  const [birthday, setbirthday]= useState();
   const [education, seteducation] = useState("");
+  
+  // const formattedDate = dayjs(birthday).format("MM/DD/YYYY");
+  // setbirthday(formattedDate);
+  // const [start_date, set_start_date] = React.useState(null);
 
+ 
   return (
     <React.Fragment>
       <CssBaseline />
@@ -208,11 +220,16 @@ export default function Userupdate() {
                   <div>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
-                        label="Birthday"
-                        margin="normal"
-                        required
+                          label="Birthday"
+                          value={dayjs(birthday)}                      
+                          margin="normal"
+                          required
                         sx={{ width: "300px", mt: 2 }}
-                        onChange={(e) => setbirthday(e.target.value)}
+                        onChange={(e) => {
+                          setbirthday(e);
+                          console.log(birthday);                  
+                        
+                        }}
                       />
                     </LocalizationProvider>
 
@@ -241,6 +258,7 @@ export default function Userupdate() {
                       label="Phone number"
                       variant="outlined"
                       required
+                      value={phonnumber}
                       sx={{
                         fontSize: "var(--joy-fontSize-sm)",
                         width: "300px",
@@ -252,6 +270,7 @@ export default function Userupdate() {
                       label="Address"
                       variant="outlined"
                       required
+                      value={address}
                       sx={{
                         fontSize: "var(--joy-fontSize-sm)",
                         ml: 3,
@@ -267,6 +286,7 @@ export default function Userupdate() {
                       label="Email"
                       variant="outlined"
                       required
+                      value={email}
                       sx={{
                         mb: 1,
                         fontSize: "var(--joy-fontSize-sm)",
@@ -279,6 +299,7 @@ export default function Userupdate() {
                       id="outlined-basic"
                       label="Salary"
                       variant="outlined"
+                      value={salary}
                       required
                       sx={{
                         fontSize: "var(--joy-fontSize-sm)",

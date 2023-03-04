@@ -187,9 +187,15 @@ export default function Usercreate() {
                       <DatePicker
                         label="Birthday"
                         margin="normal"
+                      randerInput={(params)=> <TextField {...params}/>}
                         required
                         sx={{ width: "300px", mt: 2 }}
-                        onChange={(e) => setbirthday(e.target.value)}
+                        onChange={(e) => {
+                            setbirthday(e);
+                            console.log(e);
+                            
+                        }}
+                        
                       />
                     </LocalizationProvider>
 

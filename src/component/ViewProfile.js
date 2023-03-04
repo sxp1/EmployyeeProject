@@ -36,6 +36,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import User from "./user";
 import TextField from "@mui/material/TextField";
+import dayjs, { Dayjs } from "dayjs";
 import { useParams } from "react-router-dom";
 
 export default function Usercreate() {
@@ -60,6 +61,10 @@ export default function Usercreate() {
         setposition(result[0].position);
         setsalary(result[0].salary);
         setfname(result[0].firstname);
+        setbirthday(result[0].birthday);
+        seteducation(result[0].education);
+        setemail(result[0].email);
+        setaddress(result[0].sadsad);
       })
       .catch((error) => console.log("error", error));
   }, [id]);
@@ -75,7 +80,12 @@ export default function Usercreate() {
   const [age, setage] = useState("");
   const [phonnumber, setphonnumber] = useState("");
   const [position, setposition] = useState("");
+  const [birthday, setbirthday]= useState("");
   const [salary, setsalary] = useState("");
+  const [email, setemail] = useState("");
+  const [address, setaddress] = useState("");
+  const [education, seteducation] = useState("");
+  const formattedDate = dayjs(birthday).format("DD/MM/YYYY");
 
   return (
     <React.Fragment>
@@ -91,12 +101,12 @@ export default function Usercreate() {
                 id="outlined-number"
                 sx={{ width: "300px" }}
               >
-                  <div class="col">First Name : --------------</div>
-                  <div class="col">Last Name : --------------</div>
-                  <div class="col">Age : --------------</div>
-                  <div class="col">ID Employee : --------------</div>
-                  <div class="col">Birthday : --------------</div>
-                  <div class="col">Education : --------------</div>
+                  <div class="col">First Name : {fname}  </div>
+                  <div class="col">Last Name : {lastname}</div>
+                  <div class="col">Age : {age}</div>
+                  <div class="col">ID Employee :{employeeid}</div>
+                  <div class="col">Birthday : {formattedDate}</div>
+                  <div class="col">Education : {education}</div>
               </div>
               <div>
                 <h3> ตำแหน่งหน้าที่ </h3>
@@ -105,8 +115,8 @@ export default function Usercreate() {
                 id="outlined-number"
                 sx={{ width: "100px" }}
                >
-                  <div class="col">Department : --------------</div>
-                  <div class="col">Position : --------------</div>
+                  <div class="col">Department : {department}</div>
+                  <div class="col">Position : {position}</div>
                 </div>
               </div>
               <div>
@@ -116,10 +126,10 @@ export default function Usercreate() {
                 id="outlined-number"
                 sx={{ width: "300px" }}
                >
-                  <div class="col">Address : --------------</div>
-                  <div class="col">Phone Number : --------------</div>
-                  <div class="col">Email : --------------</div>
-                  <div class="col">Salary : --------------</div>
+                  <div class="col">Address : {address}</div>
+                  <div class="col">Phone Number : {phonnumber}</div>
+                  <div class="col">Email : {email}</div>
+                  <div class="col">Salary : {salary}</div>
                 </div>
               </div>
 
